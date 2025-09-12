@@ -1,4 +1,4 @@
-import User from '../models/User.js';
+import User from '../models/user.js';
 
 export const saveUser = async (msg) => {
   const chatId = msg.chat.id;
