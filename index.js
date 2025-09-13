@@ -6,6 +6,7 @@ import { adminCommand } from "./commands/admin.js"; // modulni import qilamiz
 import { adminHelpCommand } from "./commands/adminHelp.js"; // modulni import qilamiz
 import { contactCommand } from "./commands/contactCommand.js"; // modulni import qilamiz
 import { adsCommand } from "./commands/adsCommand.js"; // modulni import qilamiz
+import { statsCommand } from "./commands/stats.js";
 
 
 // Muhit o'zgaruvchilarini tekshirish
@@ -30,6 +31,7 @@ adminCommand(bot); // admin komandasini ulash
 adminHelpCommand(bot); // Admin qo‘llanmasini ulash
 contactCommand(bot); // contact komandasini ulash
 adsCommand(bot); // reklama komandasini ulash
+statsCommand(bot);
 
 // Botni toza to'xtatish
 process.once("SIGINT", () => {
