@@ -1,18 +1,21 @@
-import Chat from "../models/chat.js";
+import Chat from "../models/Chat.js";
 
 export const saveChat = async (chat) => {
   try {
-    await Chat.updateOne(
-      { chatId: chat.id },
-      {
+    const existing = await Chat.findOne({ chatId: chat.id });
+    if (!existing) {
+      const newChat = new Chat({
         chatId: chat.id,
         type: chat.type,
         title: chat.title || ""
-      },
-      { upsert: true }
-    );
-    console.log("Chat saqlandi:", chat.id);
+      });
+      await newChat.save();
+    }
   } catch (err) {
-    console.error("Chat saqlash xatolik:", err);
+    console.error("saveChat xato:", err);
   }
+};
+
+export const getAllChats = async () => {
+  return await Chat.find({});
 };
