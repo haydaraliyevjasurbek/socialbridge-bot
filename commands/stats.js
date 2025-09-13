@@ -3,11 +3,18 @@ import User from "../models/user.js";
 export const statsCommand = (bot) => {
   bot.onText(/\/stats/, async (msg) => {
     try {
-      const users = await User.find({});
+      const users = await User.find({}); // foydalanuvchilar
       const totalUsers = users.length;
 
+      // Bot qo‘shilgan guruhlar va kanallar
+      const chats = bot.getChats ? await bot.getChats() : []; // agar bot API qo‘llab-quvvatlasa
+      const totalGroups = chats.filter(c => c.type === "group" || c.type === "supergroup").length;
+      const totalChannels = chats.filter(c => c.type === "channel").length;
+
       let text = `📊 *Bot Statistikasi*\n\n`;
-      text += `👥 Foydalanuvchilar soni: *${totalUsers}*\n\n`;
+      text += `👥 Foydalanuvchilar soni: *${totalUsers}*\n`;
+      text += `🏢 Guruhlar soni: *${totalGroups}*\n`;
+      text += `📢 Kanallar soni: *${totalChannels}*\n\n`;
 
       if (totalUsers > 0) {
         text += `📝 Foydalanuvchilar:\n`;
