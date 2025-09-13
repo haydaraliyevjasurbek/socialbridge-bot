@@ -9,13 +9,13 @@ import { adsCommand } from "./commands/adsCommand.js"; // modulni import qilamiz
 
 
 // Muhit o'zgaruvchilarini tekshirish
-const BOT_TOKEN = process.env.BOT_TOKEN; 
-if (!BOT_TOKEN) {
-  console.error(
-    "Iltimos: BOT_TOKEN .env faylida borligiga ishonch hosil qiling!"
-  );
-  process.exit(1);
-}
+// const BOT_TOKEN = process.env.BOT_TOKEN; 
+// if (!BOT_TOKEN) {
+//   console.error(
+//     "Iltimos: BOT_TOKEN .env faylida borligiga ishonch hosil qiling!"
+//   );
+//   process.exit(1);
+// }
 
 // polling rejimida ishga tushirish
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
