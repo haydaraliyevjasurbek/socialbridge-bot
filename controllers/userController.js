@@ -1,4 +1,5 @@
 import User from '../models/user.js';
+import 'dotenv/config';
 
 export const saveUser = async (msg) => {
   const chatId = msg.chat.id;
