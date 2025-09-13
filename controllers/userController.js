@@ -1,22 +1,19 @@
-import User from '../models/user.js';
-import 'dotenv/config';
+import User from "../models/User.js";
 
 export const saveUser = async (msg) => {
-  const chatId = msg.chat.id;
-
   try {
-    await User.updateOne(
-      { chatId },
-      {
-        chatId,
-        firstName: msg.from.first_name,
-        lastName: msg.from.last_name || "",
-        username: msg.from.username || ""
-      },
-      { upsert: true }
-    );
+    const chatId = msg.chat.id;
+    const firstName = msg.from.first_name;
+    const lastName = msg.from.last_name || "";
+    const username = msg.from.username || "";
+
+    const existing = await User.findOne({ chatId });
+    if (!existing) {
+      const newUser = new User({ chatId, firstName, lastName, username });
+      await newUser.save();
+    }
   } catch (err) {
-    console.error("DB saqlash xatolik:", err);
+    console.error("saveUser xato:", err);
   }
 };
 
