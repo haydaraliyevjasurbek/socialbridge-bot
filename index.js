@@ -8,6 +8,7 @@ import { contactCommand } from "./commands/contactCommand.js"; // modulni import
 import { adsCommand } from "./commands/adsCommand.js"; // modulni import qilamiz
 import { statsCommand } from "./commands/stats.js";
 import { saveUser } from './controllers/userController.js';
+import { saveChat } from './controllers/chatController.js';
 
 
 // Muhit o'zgaruvchilarini tekshirish
