@@ -7,6 +7,7 @@ import { adminHelpCommand } from "./commands/adminHelp.js"; // modulni import qi
 import { contactCommand } from "./commands/contactCommand.js"; // modulni import qilamiz
 import { adsCommand } from "./commands/adsCommand.js"; // modulni import qilamiz
 import { statsCommand } from "./commands/stats.js";
+import { saveChat } from "./controllers/chatController.js";
 
 
 // Muhit o'zgaruvchilarini tekshirish
@@ -32,6 +33,11 @@ adminHelpCommand(bot); // Admin qo‘llanmasini ulash
 contactCommand(bot); // contact komandasini ulash
 adsCommand(bot); // reklama komandasini ulash
 statsCommand(bot);
+
+bot.on("message", async (msg) => {
+  await saveUser(msg);          // foydalanuvchini saqlash
+  await saveChat(msg.chat);     // guruh yoki kanalni saqlash
+});
 
 // Botni toza to'xtatish
 process.once("SIGINT", () => {
