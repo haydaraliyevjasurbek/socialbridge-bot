@@ -33,7 +33,7 @@ export const startCommand = (bot) => {
 };
 
 
-    bot.sendMessage(chatId, "Web App orqali ijtimoiy tarmoqlar:", { reply_markup: keyboard });
+    bot.sendMessage(chatId, `Assalomu aleykum ${firstName} \n\nBizning Web App orqali ijtimoiy tarmoqlaringgizga telegramdan chiqmasdan bir tugama oraqli kiring! ${{ reply_markup: keyboard }}`);
 
     // Agar foydalanuvchi admin bo'lmasa yordam xabarini yuborish
     if (chatId !== ADMIN_CHAT_ID) {
@@ -47,7 +47,7 @@ export const startCommand = (bot) => {
     if (chatId === ADMIN_CHAT_ID) {
       bot.sendMessage(
         chatId,
-        `Salom, ${firstName}! 🌉 Social Bridge robot'ga xush kelibsiz. Siz admin panelga kira olasiz.\n\nAdmin uchun: /menu \nReklama yuborish /ads`
+        `Salom, ${firstName}! \n🌉 Social Bridge robot'ga xush kelibsiz. Siz admin panelga kira olasiz.\n\nAdmin uchun: /menu \nReklama yuborish /ads`
       );
     }
   });
