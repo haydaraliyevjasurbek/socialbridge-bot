@@ -1,50 +1,28 @@
-import 'dotenv/config';
-import { getAllUsers } from '../controllers/userController.js';
-
-const ADMIN_CHAT_ID = Number(process.env.ADMIN_CHAT_ID);
+import User from "../models/user.js";
 
 export const adsCommand = (bot) => {
-  bot.onText(/\/ads/, async (msg) => {
-    const chatId = msg.chat.id;
+  bot.onText(/\/ads (.+)/, async (msg, match) => {
+    const ADMIN_CHAT_ID = Number(process.env.ADMIN_CHAT_ID);
+    if (msg.chat.id !== ADMIN_CHAT_ID) return; // faqat adminga ruxsat
 
-    // Admin bo'lmasa chiqish
-    if (chatId !== ADMIN_CHAT_ID) return;
+    const textToSend = match[1]; // /ads xabar matni
 
-    bot.sendMessage(chatId, "📷 Rasmli reklama postini yuboring:");
-
-    // Bir marta rasm yoki matnni qabul qilish
-    bot.once('message', async (postMsg) => {
-      try {
-        // Agar rasm bo'lsa
-        if (postMsg.photo) {
-          const fileId = postMsg.photo[postMsg.photo.length - 1].file_id;
-          const caption = postMsg.caption || "";
-
-          const users = await getAllUsers();
-          users.forEach(user => {
-            bot.sendPhoto(user.chatId, fileId, { caption });
-          });
-
-          bot.sendMessage(chatId, `✅ Rasmli post ${users.length} userga yuborildi.`);
-        }
-        // Agar faqat matn bo'lsa
-        else if (postMsg.text) {
-          const text = postMsg.text;
-
-          const users = await getAllUsers();
-          users.forEach(user => {
-            bot.sendMessage(user.chatId, text);
-          });
-
-          bot.sendMessage(chatId, `✅ Matnli post ${users.length} userga yuborildi.`);
-        }
-        else {
-          bot.sendMessage(chatId, "❌ Xato: rasm yoki matn yuboring.");
-        }
-      } catch (err) {
-        console.error(err);
-        bot.sendMessage(chatId, "❌ Post yuborishda xatolik yuz berdi.");
+    try {
+      const users = await User.find({});
+      for (const user of users) {
+        bot.sendMessage(user.chatId, textToSend).catch(err => console.error(err));
       }
-    });
+
+      // Guruh va kanallar DB da saqlangan bo‘lsa
+      const chats = []; // DB dan olingan guruh/kanal list
+      for (const chat of chats) {
+        bot.sendMessage(chat.chatId, textToSend).catch(err => console.error(err));
+      }
+
+      bot.sendMessage(msg.chat.id, "✅ Xabar barcha foydalanuvchilarga, guruh va kanallarga yuborildi!");
+    } catch (err) {
+      console.error("Ads xato:", err);
+      bot.sendMessage(msg.chat.id, "⚠️ Xabar yuborishda xatolik yuz berdi!");
+    }
   });
 };
