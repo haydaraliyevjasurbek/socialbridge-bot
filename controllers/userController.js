@@ -1,5 +1,6 @@
 import User from "../models/user.js";
 
+// Foydalanuvchini saqlash
 export const saveUser = async (msg) => {
   try {
     const { id, first_name, last_name, username } = msg.from;
@@ -17,5 +18,15 @@ export const saveUser = async (msg) => {
     }
   } catch (err) {
     console.error("saveUser xato:", err);
+  }
+};
+
+// Barcha foydalanuvchilarni olish
+export const getAllUsers = async () => {
+  try {
+    return await User.find({});
+  } catch (err) {
+    console.error("getAllUsers xato:", err);
+    return [];
   }
 };
