@@ -1,13 +1,13 @@
-import User from "../models/user.js";
+import { getAllUsers } from "../controllers/userController.js";
+import { getAllChats } from "../controllers/chatController.js";
 
 export const statsCommand = (bot) => {
   bot.onText(/\/stats/, async (msg) => {
     try {
-      const users = await User.find({}); // foydalanuvchilar
+      const users = await getAllUsers();
       const totalUsers = users.length;
 
-      // Bot qo‘shilgan guruhlar va kanallar
-      const chats = bot.getChats ? await bot.getChats() : []; // agar bot API qo‘llab-quvvatlasa
+      const chats = await getAllChats();
       const totalGroups = chats.filter(c => c.type === "group" || c.type === "supergroup").length;
       const totalChannels = chats.filter(c => c.type === "channel").length;
 
