@@ -8,7 +8,7 @@ export const adminHelpCommand = (bot) => {
     if (msg.chat.id !== ADMIN_CHAT_ID) return;
 
     const message = `🛠 *Admin Bot Qo‘llanmasi*\n\n` +
-      `1️⃣ /send - Rasmli post yuborish (hammaga yoki tanlangan userga)\n` +
+      `1️⃣ /ads - Rasmli post yuborish (hammaga yoki tanlangan userga)\n` +
       `2️⃣ /admin - Foydalanuvchilar ro‘yxati va Telegram profil linklari\n` +
       `3️⃣ /contact - Userlardan kelgan xabarlarni ko‘rish\n` +
       `4️⃣ /stats - Foydalanuvchilar soni va statistik ma'lumot\n` +
@@ -19,7 +19,6 @@ export const adminHelpCommand = (bot) => {
         [{ text: "Foydalanuvchilar ro'yxati", callback_data: "users_list" }],
         [{ text: "Rasmli post yuborish", callback_data: "send_post" }],
         [{ text: "Statistika", callback_data: "stats" }],
-        [{ text: "Qo‘llanma", callback_data: "help" }]
       ]
     };
 
@@ -39,13 +38,10 @@ export const adminHelpCommand = (bot) => {
         bot.sendMessage(chatId, "📋 Foydalanuvchilar ro‘yxatini ko‘rish uchun /admin komandasini ishlating.");
         break;
       case "send_post":
-        bot.sendMessage(chatId, "📷 Rasmli post yuborish uchun /send komandasini ishlating.");
+        bot.sendMessage(chatId, "📷 Rasmli post yuborish uchun /ads komandasini ishlating.");
         break;
       case "stats":
         bot.sendMessage(chatId, "📊 Foydalanuvchilar soni va statistikani ko‘rish uchun /stats komandasini ishlating.");
-        break;
-      case "help":
-        bot.sendMessage(chatId, "🛠 Bu qo‘llanma yordam beradi. Boshqa komandalarni ishlatish uchun tugmalarni bosing.");
         break;
       default:
         bot.sendMessage(chatId, "❌ Noma'lum tanlov");
