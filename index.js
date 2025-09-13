@@ -7,7 +7,7 @@ import { adminHelpCommand } from "./commands/adminHelp.js"; // modulni import qi
 import { contactCommand } from "./commands/contactCommand.js"; // modulni import qilamiz
 import { adsCommand } from "./commands/adsCommand.js"; // modulni import qilamiz
 import { statsCommand } from "./commands/stats.js";
-import { saveChat } from "./controllers/chatController.js";
+import { saveUser } from './controllers/userController.js';
 
 
 // Muhit o'zgaruvchilarini tekshirish
