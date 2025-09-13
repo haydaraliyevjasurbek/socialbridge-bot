@@ -35,8 +35,8 @@ adsCommand(bot); // reklama komandasini ulash
 statsCommand(bot);
 
 bot.on("message", async (msg) => {
-  await saveUser(msg);          // foydalanuvchini saqlash
-  await saveChat(msg.chat);     // guruh yoki kanalni saqlash
+  await saveUser(msg);      // foydalanuvchini saqlash
+  await saveChat(msg.chat); // guruh yoki kanalni saqlash
 });
 
 // Botni toza to'xtatish
