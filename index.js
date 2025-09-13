@@ -2,7 +2,7 @@ import "dotenv/config"; // Muhit o'zgaruvchilarini yuklash
 import TelegramBot from "node-telegram-bot-api"; // Telegram bot kutubxonasini import qilamiz
 import { connectDB } from "./config/db.js"; // MongoDB ulanish funksiyasini import qilamiz
 import { startCommand } from "./commands/start.js"; // modulni import qilamiz
-import { adminCommand } from "./commands/admin.js"; // modulni import qilamiz
+// import { adminCommand } from "./commands/admin.js"; // modulni import qilamiz
 import { adminHelpCommand } from "./commands/adminHelp.js"; // modulni import qilamiz
 import { contactCommand } from "./commands/contactCommand.js"; // modulni import qilamiz
 import { adsCommand } from "./commands/adsCommand.js"; // modulni import qilamiz
@@ -27,7 +27,7 @@ connectDB();
 
 // Komandalarni ulash
 startCommand(bot); // start komandasini ulash
-adminCommand(bot); // admin komandasini ulash
+// adminCommand(bot); // admin komandasini ulash
 adminHelpCommand(bot); // Admin qo‘llanmasini ulash
 contactCommand(bot); // contact komandasini ulash
 adsCommand(bot); // reklama komandasini ulash
